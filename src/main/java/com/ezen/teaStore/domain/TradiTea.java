@@ -1,7 +1,10 @@
 package com.ezen.teaStore.domain;
 
+import java.text.NumberFormat;
 import java.util.Date;
+import java.util.Locale;
 
+import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,6 +18,12 @@ public class TradiTea {
 	private int stock;
 	private Date prodDate;
 	private String amount;
+	@Setter(AccessLevel.NONE)
 	private double price;
+	public void setPrice(double price) {
+		this.price = price;
+		this.priceStr = String.format("%,.0f", price);
+	}
+	private String priceStr;
 	private String prodDesc;
 }

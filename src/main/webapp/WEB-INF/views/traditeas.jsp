@@ -31,7 +31,7 @@
 					<p>차이름: ${tradiTea.teaName}</p>
 					<p>제고량: ${tradiTea.stock}</p>
 					<p>생산일: ${tradiTea.prodDate}</p>
-					<p>판매가: ${tradiTea.price}</p>
+					<p>판매가: ${tradiTea.priceStr}</p>
 				</div>
 			</c:forEach>
 		</div>
