@@ -18,5 +18,8 @@
 			<p>${sellitems}</p>
 		</div>
 	</div>
+	<div class="mainDiv">
+	<p><a href="<c:url value='/tea/listing'/>">전통차 목록</a>
+	</div>
 </body>
 </html>
