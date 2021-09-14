@@ -71,5 +71,18 @@ public class TradiTeaMaria implements TradiTeaRepo {
 				+ "where 차이름 != :todayTea and 가격 != 가격_원 "
 				+ "and 가격_원 is not null";
 		jdbcTemplate.update(sql, params);
+	}
+
+	@Override
+	public List<TradiTea> getTeasByName(String teaName) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("teaName", "%" + teaName + "%");
+		
+		String query = "SELECT 상품ID, 차이름, 제고수량, 제조일, 용량, "
+				+ "가격, 설명 FROM 전통차 "
+				+ "where 차이름 like :teaName";
+		List<TradiTea> result = jdbcTemplate.query(query, 
+				params, new TradiTeaMapper());
+		return result;
 	}	
 }

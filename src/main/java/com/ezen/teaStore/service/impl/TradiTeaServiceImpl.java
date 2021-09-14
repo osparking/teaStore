@@ -29,4 +29,9 @@ public class TradiTeaServiceImpl implements TradiTeaService {
 	public void todayTea(String todayTea) {
 		tradiTeaRepo.todayTea(todayTea);
 	}
+
+	@Override
+	public List<TradiTea> getTeasByName(String teaName) {
+		return tradiTeaRepo.getTeasByName(teaName);
+	}
 }

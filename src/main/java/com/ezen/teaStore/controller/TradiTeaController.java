@@ -7,9 +7,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.ezen.teaStore.domain.TeaType;
 import com.ezen.teaStore.service.TradiTeaService;
 
 @Controller
@@ -23,6 +23,19 @@ public class TradiTeaController {
 		super();
 	}
 
+	@RequestMapping("/listing/{teaName}") 
+	public String getTeasByName(Model model,
+			@PathVariable("teaName") String teaName) {
+		model.addAttribute("welcomeMsg", 
+				"우리 인터넷 전통찻집 홈페이지 방문을 환영합니다.");
+		model.addAttribute("sellitems", 
+				"판매 품목: 다양한 한국의 전통차");
+		
+		model.addAttribute("tradiTeas", 
+				tradiTeaService.getTeasByName(teaName));
+		return "traditeas";		
+	}
+	
 	@RequestMapping("/todaytea") 
 	public String todayTea(Model model) {
 		List<String> nameList = tradiTeaService.getTEA_COUNT();

@@ -8,4 +8,5 @@ public interface TradiTeaRepo {
 	List<TradiTea> getAllTradiTeas();
 	List<String> getTEA_COUNT();
 	void todayTea(String todayTea);
+	List<TradiTea> getTeasByName(String teaName);
 }
