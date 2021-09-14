@@ -23,7 +23,8 @@ public class TradiTeaMaria implements TradiTeaRepo {
 	@Override
 	public List<TradiTea> getAllTradiTeas() {
 		var params = new HashMap<String, Object>();
-		String query = "SELECT * FROM 전통차";
+		String query = "SELECT 상품ID, 차이름, 제고수량, 제조일,"
+				+ " 용량, 가격, 설명 FROM 전통차";
 		List<TradiTea> result = jdbcTemplate.query(query, 
 				params, new TradiTeaMapper());
 		return result;
@@ -46,5 +47,29 @@ public class TradiTeaMaria implements TradiTeaRepo {
 			tradiTea.setProdDesc(rs.getString(idx++));
 			return tradiTea;
 		}
+	}
+
+	@Override
+	public List<String> getTEA_COUNT() {
+		var params = new HashMap<String, Object>();
+		String query = "SELECT 차이름 FROM 전통차";
+		var nameList= jdbcTemplate.queryForList(
+				query, params, String.class); 
+		return nameList;
+	}
+
+	@Override
+	public void todayTea(String todayTea) {
+		String sql = "update 전통차 set 가격_원 = 가격, 가격=가격*0.9 " 
+				+ "where 차이름 = :todayTea and 가격_원 is null";
+
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("todayTea", todayTea);
+		jdbcTemplate.update(sql, params);
+		
+		sql = "update 전통차 set 가격=가격_원, 가격_원 = null "
+				+ "where 차이름 != :todayTea and 가격 != 가격_원 "
+				+ "and 가격_원 is not null";
+		jdbcTemplate.update(sql, params);
 	}	
 }

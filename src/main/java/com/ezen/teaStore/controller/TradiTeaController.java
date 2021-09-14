@@ -1,17 +1,36 @@
 package com.ezen.teaStore.controller;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.ezen.teaStore.domain.TeaType;
 import com.ezen.teaStore.service.TradiTeaService;
 
 @Controller
 @RequestMapping("tea") 
 public class TradiTeaController {
+	
 	@Autowired
 	TradiTeaService tradiTeaService;
+	
+	public TradiTeaController() {
+		super();
+	}
+
+	@RequestMapping("/todaytea") 
+	public String todayTea(Model model) {
+		List<String> nameList = tradiTeaService.getTEA_COUNT();
+		String todayTea = getTodaySpecial(nameList);
+//		tradiTeaService.todayTea(todayTea);
+		tradiTeaService.todayTea("율무차");
+		return "redirect:/tea/listing";
+	}
 	
 	@RequestMapping("/listing") 
 	public String listing(Model model) {
@@ -23,5 +42,13 @@ public class TradiTeaController {
 		model.addAttribute("tradiTeas", 
 				tradiTeaService.getAllTradiTeas());
 		return "traditeas";
+	}
+
+	static private String getTodaySpecial(List<String> nameList) {
+		int idx = (int)ChronoUnit.DAYS.between(
+				LocalDate.of(2021, 6, 22), LocalDate.now()) 
+				% nameList.size();
+		
+		return nameList.get(idx);
 	}
 }

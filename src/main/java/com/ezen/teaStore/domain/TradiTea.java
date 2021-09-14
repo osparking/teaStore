@@ -1,8 +1,6 @@
 package com.ezen.teaStore.domain;
 
-import java.text.NumberFormat;
 import java.util.Date;
-import java.util.Locale;
 
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;

@@ -20,6 +20,7 @@
 	</div>
 	<div class="mainDiv">
 	<p><a href="<c:url value='/tea/listing'/>">전통차 목록</a>
+	<p><a href="<c:url value='/tea/todaytea'/>">오늘차 할인</a>
 	</div>
 </body>
 </html>
