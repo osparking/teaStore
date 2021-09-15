@@ -57,6 +57,14 @@
 									<form:input id="price" path="price" type="text" /></td>
 							</tr>
 							<tr>
+								<th><label for="priceOriginal"> 
+									<spring:message code="addTea.form.priceOriginal.label" />								  
+								 	</label></th> 
+								<td align="left">
+									<form:input id="priceOriginal" path="priceOriginal" 
+										type="text" /></td>
+							</tr>
+							<tr>
 								<th><label for="stock"> 
 									<spring:message code="addTea.form.stock.label" />								  
 								 	</label></th> 

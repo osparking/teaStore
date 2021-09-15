@@ -12,8 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.MatrixVariable;
@@ -46,11 +46,13 @@ public class TradiTeaController {
 	@RequestMapping(value="/add", method = RequestMethod.POST)
 	public String addTradiTea(@ModelAttribute("tradiTea") 
 			TradiTea tradiTea, BindingResult result) {
-		
-		tradiTeaService.addTradiTea(tradiTea);
-		for(ObjectError objectError : result.getAllErrors()) {
-		       System.out.println("error: " + objectError);
-		 }		
+		String[] suppressedFields = result.getSuppressedFields();
+		if (suppressedFields.length > 0) {
+		   throw new RuntimeException("허용되지 않은 항목을 엮어오려고 함: " +
+		      StringUtils.arrayToCommaDelimitedString(suppressedFields));
+		} else {
+		   tradiTeaService.addTradiTea(tradiTea);
+		}
 		return "redirect:/tea/listing";
 	}
 	
@@ -60,6 +62,7 @@ public class TradiTeaController {
 	    CustomDateEditor orderDateEditor = 
 	        new CustomDateEditor(dateFormat, true);
 	    binder.registerCustomEditor(Date.class, orderDateEditor);
+	    binder.setDisallowedFields("priceOriginal");
 	}
 	
 	@RequestMapping("/teaDetail")
