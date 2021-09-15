@@ -31,7 +31,9 @@
 			<p>제조 날짜: ${tradiTea.prodDate}</p>
 			<p>상품 용량: ${tradiTea.amount}</p>
 			<p>판매 가격: ${tradiTea.priceStr}</p>
-			<p>본래 가격: ${tradiTea.priceOriginalStr}</p>
+			<c:if test="${tradiTea.priceOriginal > 0}">
+				<p>본래 가격: ${tradiTea.priceOriginalStr}</p>
+			</c:if>
 			<p>상품 설명: ${tradiTea.prodDesc}</p>
 		</div>
 	</div>

@@ -52,4 +52,5 @@ div.teaDetail {
 	border: 1px solid black;
 	display: block;
 	overflow: auto;
+	margin: auto;
 }

@@ -25,9 +25,9 @@ public class TradiTea {
 	}
 	
 	@Setter(AccessLevel.NONE)
-	private double priceOrignal;
+	private double priceOriginal;
 	public void setPriceOrignal(double price) {
-		this.priceOrignal = price;
+		this.priceOriginal = price;
 		this.priceOriginalStr = String.format("%,.0f", price);
 	}
 	
