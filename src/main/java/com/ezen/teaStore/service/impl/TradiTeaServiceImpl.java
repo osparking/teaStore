@@ -1,6 +1,7 @@
 package com.ezen.teaStore.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,5 +34,11 @@ public class TradiTeaServiceImpl implements TradiTeaService {
 	@Override
 	public List<TradiTea> getTeasByName(String teaName) {
 		return tradiTeaRepo.getTeasByName(teaName);
+	}
+
+	@Override
+	public List<TradiTea> getByNamePrice(String teaName, 
+			Map<String, String> price) {
+		return tradiTeaRepo.getByNamePrice(teaName, price);
 	}
 }

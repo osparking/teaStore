@@ -20,6 +20,10 @@
 	</div>
 	<div class="mainDiv">
 		<p>
+			<a href="<c:url 
+				value='/tea/listing/녹차/price;low=20000;high=30000'/>">
+				녹차(2~3만원)</a>
+		<p>
 			<a href="<c:url value='/tea/listing'/>">전통차 목록</a>
 		<p>
 			<a href="<c:url value='/tea/todaytea'/>">오늘차 할인</a>

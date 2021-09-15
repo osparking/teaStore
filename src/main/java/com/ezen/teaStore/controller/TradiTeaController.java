@@ -3,10 +3,12 @@ package com.ezen.teaStore.controller;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.MatrixVariable;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -21,6 +23,22 @@ public class TradiTeaController {
 	
 	public TradiTeaController() {
 		super();
+	}
+	
+	@RequestMapping("/listing/{teaName}/{price}") 
+	public String getTeasNamePrice(Model model,
+			@PathVariable("teaName") String teaName,
+			@MatrixVariable(pathVar="price") 
+				Map<String,String> price){
+		model.addAttribute("welcomeMsg", 
+				"우리 인터넷 전통찻집 홈페이지 방문을 환영합니다.");
+		model.addAttribute("sellitems", 
+				"판매 품목: 다양한 한국의 전통차");
+		
+		model.addAttribute("tradiTeas", 
+				tradiTeaService.getByNamePrice(teaName, price));
+		
+		return "traditeas";		
 	}
 
 	@RequestMapping("/listing/{teaName}") 
@@ -40,8 +58,7 @@ public class TradiTeaController {
 	public String todayTea(Model model) {
 		List<String> nameList = tradiTeaService.getTEA_COUNT();
 		String todayTea = getTodaySpecial(nameList);
-//		tradiTeaService.todayTea(todayTea);
-		tradiTeaService.todayTea("율무차");
+		tradiTeaService.todayTea(todayTea);
 		return "redirect:/tea/listing";
 	}
 	

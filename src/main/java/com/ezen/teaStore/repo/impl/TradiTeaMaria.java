@@ -84,5 +84,24 @@ public class TradiTeaMaria implements TradiTeaRepo {
 		List<TradiTea> result = jdbcTemplate.query(query, 
 				params, new TradiTeaMapper());
 		return result;
+	}
+
+	@Override
+	public List<TradiTea> getByNamePrice(String teaName, Map<String, String> price) {
+		var sb = new StringBuilder("SELECT 상품ID, 차이름, ");
+		
+		sb.append("제고수량, 제조일, 용량, 가격, 설명 FROM 전통차 ");
+		sb.append("where 차이름 like :teaName ");
+		sb.append("and 가격 >= :low and 가격 <= :high");
+		
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("teaName", "%" + teaName + "%");
+		params.put("low", price.get("low"));
+		params.put("high", price.get("high"));
+		
+		List<TradiTea> result = jdbcTemplate.query(sb.toString(), 
+				params, new TradiTeaMapper());
+		
+		return result;
 	}	
 }
