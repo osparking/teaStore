@@ -12,4 +12,5 @@ public interface TradiTeaRepo {
 	List<TradiTea> getTeasByName(String teaName);
 	List<TradiTea> getByNamePrice(String teaName, 
 			Map<String, String> price);
+	TradiTea getTradiTea(int teaId);
 }

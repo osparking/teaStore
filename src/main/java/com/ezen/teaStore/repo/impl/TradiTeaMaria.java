@@ -23,8 +23,7 @@ public class TradiTeaMaria implements TradiTeaRepo {
 	@Override
 	public List<TradiTea> getAllTradiTeas() {
 		var params = new HashMap<String, Object>();
-		String query = "SELECT 상품ID, 차이름, 제고수량, 제조일,"
-				+ " 용량, 가격, 설명 FROM 전통차";
+		String query = SELECT_PREFIX;
 		List<TradiTea> result = jdbcTemplate.query(query, 
 				params, new TradiTeaMapper());
 		return result;
@@ -43,8 +42,9 @@ public class TradiTeaMaria implements TradiTeaRepo {
 			tradiTea.setStock(rs.getInt(idx++));
 			tradiTea.setProdDate(rs.getDate(idx++));
 			tradiTea.setAmount(rs.getString(idx++));
-			tradiTea.setPrice(rs.getDouble(idx++));
 			tradiTea.setProdDesc(rs.getString(idx++));
+			tradiTea.setPrice(rs.getDouble(idx++));
+			tradiTea.setPriceOrignal(rs.getDouble(idx++));
 			return tradiTea;
 		}
 	}
@@ -78,19 +78,19 @@ public class TradiTeaMaria implements TradiTeaRepo {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("teaName", "%" + teaName + "%");
 		
-		String query = "SELECT 상품ID, 차이름, 제고수량, 제조일, 용량, "
-				+ "가격, 설명 FROM 전통차 "
-				+ "where 차이름 like :teaName";
+		String query = SELECT_PREFIX + "where 차이름 like :teaName";
 		List<TradiTea> result = jdbcTemplate.query(query, 
 				params, new TradiTeaMapper());
 		return result;
 	}
 
+	private static final String SELECT_PREFIX = 
+			"SELECT 상품ID, 차이름, 제고수량, 제조일, 용량, 설명, 가격, 가격_원 FROM 전통차 ";
+	
 	@Override
-	public List<TradiTea> getByNamePrice(String teaName, Map<String, String> price) {
-		var sb = new StringBuilder("SELECT 상품ID, 차이름, ");
-		
-		sb.append("제고수량, 제조일, 용량, 가격, 설명 FROM 전통차 ");
+	public List<TradiTea> getByNamePrice(String teaName, 
+			Map<String, String> price) {
+		var sb = new StringBuilder(SELECT_PREFIX);
 		sb.append("where 차이름 like :teaName ");
 		sb.append("and 가격 >= :low and 가격 <= :high");
 		
@@ -101,6 +101,20 @@ public class TradiTeaMaria implements TradiTeaRepo {
 		
 		List<TradiTea> result = jdbcTemplate.query(sb.toString(), 
 				params, new TradiTeaMapper());
+		
+		return result;
+	}
+
+	@Override
+	public TradiTea getTradiTea(int teaId) {
+		var sb = new StringBuilder(SELECT_PREFIX);
+		sb.append("where 상품ID = :teaId  ");
+		
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("teaId", teaId);
+		
+		TradiTea result = jdbcTemplate.queryForObject(
+				sb.toString(), params, new TradiTeaMapper());
 		
 		return result;
 	}	

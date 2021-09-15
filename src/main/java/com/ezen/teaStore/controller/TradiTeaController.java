@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.MatrixVariable;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ezen.teaStore.service.TradiTeaService;
 
@@ -25,6 +26,17 @@ public class TradiTeaController {
 		super();
 	}
 	
+	@RequestMapping("/teaDetail")
+	public String getTradiTea(Model model, 
+			@RequestParam("teaId") int teaId) {
+		
+		model.addAttribute("welcomeMsg", "전통차 상품 정보");
+		model.addAttribute("tradiTea", 
+				tradiTeaService.getTradiTea(teaId));
+		
+		return "traditea";
+	}
+
 	@RequestMapping("/listing/{teaName}/{price}") 
 	public String getTeasNamePrice(Model model,
 			@PathVariable("teaName") String teaName,

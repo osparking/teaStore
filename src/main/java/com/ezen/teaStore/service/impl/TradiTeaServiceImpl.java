@@ -41,4 +41,9 @@ public class TradiTeaServiceImpl implements TradiTeaService {
 			Map<String, String> price) {
 		return tradiTeaRepo.getByNamePrice(teaName, price);
 	}
+
+	@Override
+	public TradiTea getTradiTea(int teaId) {
+		return tradiTeaRepo.getTradiTea(teaId);
+	}
 }
