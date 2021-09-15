@@ -35,15 +35,48 @@
 					<div>
 						<table>
 							<tr>
-								<th><label for="teaName"> <spring:message
-											code="addTea.form.teaName.label" />
-								</label>
-								<td><form:input id="teaName" path="teaName" type="text" /></td>
+								<th><label for="teaName"> 
+									<spring:message code="addTea.form.teaName.label" />
+								</label></th>
+								<td align="left">
+									<form:input id="teaName" path="teaName" type="text" /></td>
 							</tr>
 							<tr>
-								<th><label for="prodDate"> 제조일(mm/dd/yyyy) </label>
-								<td><form:input id="prodDate" path="prodDate" type="text" /></td>
+								<th><label for="amount"> 
+									<spring:message code="addTea.form.amount.label" />								  
+								 	</label></th> 
+								<td align="left">
+									<form:input id="amount" path="amount" type="text" /></td>
 							</tr>
+							<tr>
+								<th><label for="price"> 
+									<spring:message code="addTea.form.price.label" />								  
+								 	</label></th> 
+								<td align="left">
+									<form:input id="price" path="price" type="text" /></td>
+							</tr>
+							<tr>
+								<th><label for="stock"> 
+									<spring:message code="addTea.form.stock.label" />								  
+								 	</label></th> 
+								<td align="left">
+									<form:input id="stock" path="stock" type="text" /></td>
+							</tr>
+							<tr>
+								<th><label for="prodDate">
+									<spring:message code="addTea.form.prodDate.label" />								  
+								 	</label></th> 
+								<td align="left">
+									<form:input id="prodDate" path="prodDate" type="text" /></td>
+							</tr>
+							<tr>
+								<th><label for="prodDesc"> 
+									<spring:message code="addTea.form.prodDesc.label" />								  
+								 	</label></th> 
+								<td><form:textarea id="prodDesc" path="prodDesc" 
+									type="textarea" cols='40' rows='5'></form:textarea></td>
+							</tr>
+
 						</table>
 					</div>
 					<div>
