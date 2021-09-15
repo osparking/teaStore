@@ -46,4 +46,9 @@ public class TradiTeaServiceImpl implements TradiTeaService {
 	public TradiTea getTradiTea(int teaId) {
 		return tradiTeaRepo.getTradiTea(teaId);
 	}
+
+	@Override
+	public void addTradiTea(TradiTea tradiTea) {
+		tradiTeaRepo.addTradiTea(tradiTea);
+	}
 }

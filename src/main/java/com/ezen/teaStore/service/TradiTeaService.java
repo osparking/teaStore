@@ -13,4 +13,5 @@ public interface TradiTeaService {
 	List<TradiTea> getByNamePrice(String teaName, 
 			Map<String, String> price);
 	TradiTea getTradiTea(int teaId);
+	void addTradiTea(TradiTea tradiTea);
 }

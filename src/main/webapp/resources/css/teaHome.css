@@ -54,3 +54,25 @@ div.teaDetail {
 	overflow: auto;
 	margin: auto;
 }
+
+.Aligner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Aligner-item {
+  max-width: 50%;
+}
+
+th {
+	text-align: right;
+}
+
+.newTea {
+	margin: auto;
+	width: 500px;
+} 
+#btnAdd {
+	width: 100px;
+}

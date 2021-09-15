@@ -20,6 +20,9 @@
 	</div>
 	<div class="mainDiv">
 		<p>
+			<a href="<c:url value='/tea/add'/>">차 등록</a>
+		</p>
+		<p>
 			<a href="<c:url value='/tea/teaDetail?teaId=3'/>">차 (ID=3)</a>
 		</p>
 		<p>

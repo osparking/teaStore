@@ -35,6 +35,15 @@
 				<p>본래 가격: ${tradiTea.priceOriginalStr}</p>
 			</c:if>
 			<p>상품 설명: ${tradiTea.prodDesc}</p>
+			<p class="Aligner">
+				<c:set var='goback' value='/resources/images/goback.png'/>
+				<a class="Aligner-item" href="#"><span> <img
+						src="<c:url value="${goback}"/>" /></span></a>
+				&nbsp;&nbsp; 
+				<a class="Aligner-item" href="#"><span> <img
+						src="<c:url value='/resources/images/buy_it.png'/>" /></span></a>
+			</p>
+
 		</div>
 	</div>
 </body>

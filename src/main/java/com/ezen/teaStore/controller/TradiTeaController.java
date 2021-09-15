@@ -8,11 +8,15 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.MatrixVariable;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.ezen.teaStore.domain.TradiTea;
 import com.ezen.teaStore.service.TradiTeaService;
 
 @Controller
@@ -24,6 +28,20 @@ public class TradiTeaController {
 	
 	public TradiTeaController() {
 		super();
+	}
+	
+	@RequestMapping(value="/add", method = RequestMethod.GET)
+	public String addTradiTea(
+			@ModelAttribute("tradiTea") TradiTea tradiTea) {
+		return "addTea";
+	}
+
+	@RequestMapping(value="/add", method = RequestMethod.POST)
+	public String addTradiTea(@ModelAttribute("tradiTea") 
+			TradiTea tradiTea, BindingResult result) {
+		
+		tradiTeaService.addTradiTea(tradiTea);
+		return "redirect:/tea/listing";
 	}
 	
 	@RequestMapping("/teaDetail")

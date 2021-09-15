@@ -117,5 +117,24 @@ public class TradiTeaMaria implements TradiTeaRepo {
 				sb.toString(), params, new TradiTeaMapper());
 		
 		return result;
+	}
+
+	@Override
+	public void addTradiTea(TradiTea tradiTea) {
+		var sb = new StringBuffer();
+		sb.append("INSERT INTO 전통차 ");
+		sb.append("(차이름, 제고수량, 제조일, 용량, 가격, 설명) ");
+		sb.append("VALUES(:teaName, :stock, :prodDate, ");
+		sb.append(":amount, :price, :prodDesc)");
+		
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("teaName", tradiTea.getTeaName());
+		params.put("stock", tradiTea.getStock());
+		params.put("prodDate", tradiTea.getProdDate());
+		params.put("amount", tradiTea.getAmount());
+		params.put("price", tradiTea.getPrice());
+		params.put("prodDesc", tradiTea.getProdDesc());
+		
+		jdbcTemplate.update(sb.toString(), params);
 	}	
 }
