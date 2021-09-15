@@ -31,7 +31,8 @@
 			<form:form method="POST" modelAttribute="tradiTea"
 				onsubmit="return checkName()">
 				<fieldset>
-					<legend>신상품 정보 입력</legend>
+					<legend><spring:message code="addTea.form.legend" />
+						</legend>
 					<div>
 						<table>
 							<tr>
